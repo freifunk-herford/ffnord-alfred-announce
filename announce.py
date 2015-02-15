@@ -46,7 +46,7 @@ def gateway(batadv_dev):
   output = subprocess.check_output(["batctl","-m",batadv_dev,"gwl","-n"])
   output_utf8 = output.decode("utf-8")
   lines = output_utf8.splitlines()
-  gw = []
+  gw = None
 
   for line in lines:
     gw_line = re.match(r"^=> +([0-9a-f:]+) ", line)
