@@ -73,13 +73,19 @@ def addresses(bridge_dev):
   ip_addrs = netif.ifaddresses(bridge_dev)
   ip_list = []
 
-  for ip6 in netif.ifaddresses(bridge_dev)[netif.AF_INET6]:
-    raw6 = ip6['addr'].split('%')
-    ip_list.append(raw6[0])
+  try:
+    for ip6 in netif.ifaddresses(bridge_dev)[netif.AF_INET6]:
+      raw6 = ip6['addr'].split('%')
+      ip_list.append(raw6[0])
+  except:
+    pass
 
-  for ip4 in netif.ifaddresses(bridge_dev)[netif.AF_INET]:
-    raw4 = ip4['addr'].split('%')
-    ip_list.append(raw4[0])
+  try:
+    for ip4 in netif.ifaddresses(bridge_dev)[netif.AF_INET]:
+      raw4 = ip4['addr'].split('%')
+      ip_list.append(raw4[0])
+  except:
+    pass
 
   return ip_list
 
