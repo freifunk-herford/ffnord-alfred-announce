@@ -100,6 +100,9 @@ parser.add_argument('-b', '--batman', action='store',
 parser.add_argument('-i', '--interface', action='store',
                   help='freifunk bridge',default='br0')
 
+parser.add_argument('-s', '--sitecode', action='store',
+                  help='freifunk site code',default='ffgotham')
+
 args = parser.parse_args()
 
 options = vars(args)
@@ -107,6 +110,7 @@ options = vars(args)
 directory = options['directory']
 batadv_dev = options['batman']
 bridge_dev = options['interface']
+sitecode = options['sitecode']
 
 data = {}
 

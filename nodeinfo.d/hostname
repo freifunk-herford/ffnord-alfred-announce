@@ -1,1 +1,1 @@
-socket.gethostname()
+socket.gethostname() + " (" + sitecode + ")"

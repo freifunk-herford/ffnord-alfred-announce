@@ -22,13 +22,17 @@ while test $# -gt 0; do
       test $? -ne 0 && exit
       ALFREDSOCKET="-u $1"
       ;;
+    -s)
+      shift
+      SITECODE="-s $1"
+      ;;
     -h|--help)
-      echo "Usage: $0 [-i <ifname>] [-b <batadv-dev>] [-u <alfred-socket>]"
+      echo "Usage: $0 [-i <ifname>] [-b <batadv-dev>] [-u <alfred-socket>] [-s <site_code>]"
       exit
       ;;
   esac
   shift
 done
 
-"${DIR}"/announce.py -d "${DIR}"/nodeinfo.d/ ${INTERFACE} ${BATADV} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 158
-"${DIR}"/announce.py -d "${DIR}"/statistics.d/ ${INTERFACE} ${BATADV} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 159
+"${DIR}"/announce.py -d "${DIR}"/nodeinfo.d/ ${INTERFACE} ${BATADV} ${SITECODE} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 158
+"${DIR}"/announce.py -d "${DIR}"/statistics.d/ ${INTERFACE} ${BATADV} ${SITECODE} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 159
