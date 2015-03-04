@@ -23,7 +23,7 @@ while test $# -gt 0; do
       ALFREDSOCKET="-u $1"
       ;;
     -h|--help)
-      echo "Usage: $0 [-i <ifname>] [-b <batadv-dev>]"
+      echo "Usage: $0 [-i <ifname>] [-b <batadv-dev>] [-u <alfred-socket>]"
       exit
       ;;
   esac
