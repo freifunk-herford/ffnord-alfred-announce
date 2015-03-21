@@ -89,16 +89,21 @@ def addresses(bridge_dev):
 
   return ip_list
 
-def mac_addr(fastd_dev):
+def mac_mesh(fastd_dev,meshmode=False):
   interface = netif.ifaddresses(fastd_dev)
+  mesh = []
   mac = None
 
   try:
     mac = interface[netif.AF_LINK]
+    mesh.append(mac[0]['addr'])
   except:
     KeyError
 
-  return mac[0]['addr']
+  if meshmode:
+    return mesh
+  else:
+    return mac[0]['addr']
 
 parser = argparse.ArgumentParser()
 
