@@ -89,6 +89,17 @@ def addresses(bridge_dev):
 
   return ip_list
 
+def mac_addr(fastd_dev):
+  interface = netif.ifaddresses(fastd_dev)
+  mac = None
+
+  try:
+    mac = interface[netif.AF_LINK]
+  except:
+    KeyError
+
+  return mac[0]['addr']
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument('-d', '--directory', action='store',
@@ -96,6 +107,9 @@ parser.add_argument('-d', '--directory', action='store',
 
 parser.add_argument('-b', '--batman', action='store',
                   help='batman-adv device',default='bat0')
+
+parser.add_argument('-f', '--fastd', action='store',
+                  help='batman-adv device',default='mesh-vpn')
 
 parser.add_argument('-i', '--interface', action='store',
                   help='freifunk bridge',default='br0')
@@ -109,6 +123,7 @@ options = vars(args)
 
 directory = options['directory']
 batadv_dev = options['batman']
+fastd_dev = options['fastd']
 bridge_dev = options['interface']
 sitecode = options['sitecode']
 

@@ -16,6 +16,12 @@ while test $# -gt 0; do
       test $? -ne 0 && exit
       BATADV="-b $1"
       ;;
+    -f)
+      shift
+      ip link show dev $1 > /dev/null
+      test $? -ne 0 && exit
+      FASTD="-f $1"
+      ;;
     -u)
       shift
       alfred-json -z -r 158 -s $1 > /dev/null
@@ -27,12 +33,12 @@ while test $# -gt 0; do
       SITECODE="-s $1"
       ;;
     -h|--help)
-      echo "Usage: $0 [-i <ifname>] [-b <batadv-dev>] [-u <alfred-socket>] [-s <site_code>]"
+      echo "Usage: $0 [-i <ifname>] [-b <batadv-dev>] [-f <fastd-dev>] [-u <alfred-socket>] [-s <site_code>]"
       exit
       ;;
   esac
   shift
 done
 
-"${DIR}"/announce.py -d "${DIR}"/nodeinfo.d/ ${INTERFACE} ${BATADV} ${SITECODE} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 158
-"${DIR}"/announce.py -d "${DIR}"/statistics.d/ ${INTERFACE} ${BATADV} ${SITECODE} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 159
+"${DIR}"/announce.py -d "${DIR}"/nodeinfo.d/ ${INTERFACE} ${BATADV} ${FASTD} ${SITECODE} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 158
+"${DIR}"/announce.py -d "${DIR}"/statistics.d/ ${INTERFACE} ${BATADV} ${FASTD} ${SITECODE} | gzip | alfred $ALFREDSOCKET $INTERFACE -s 159
