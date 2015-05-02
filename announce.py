@@ -80,13 +80,6 @@ def addresses(bridge_dev):
   except:
     pass
 
-  try:
-    for ip4 in netif.ifaddresses(bridge_dev)[netif.AF_INET]:
-      raw4 = ip4['addr'].split('%')
-      ip_list.append(raw4[0])
-  except:
-    pass
-
   return ip_list
 
 def mac_mesh(fastd_dev,meshmode=False):
