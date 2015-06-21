@@ -10,6 +10,7 @@ A gluon compatible status script for alfred in python.
  * alfred binary in PATH
  * python3
  * python3-netifaces
+ * py-cpuinfo
 
 ## Setup
 

@@ -8,6 +8,7 @@ import socket
 import subprocess
 import re
 import netifaces as netif
+from cpuinfo import cpuinfo
 
 # Force encoding to UTF-8
 import locale                                  # Ensures that subsequent open()s
@@ -97,6 +98,10 @@ def mac_mesh(fastd_dev,meshmode=False):
     return mesh
   else:
     return mac[0]['addr']
+
+def cpu_info():
+  info = cpuinfo.get_cpu_info()
+  return info['brand']
 
 parser = argparse.ArgumentParser()
 
