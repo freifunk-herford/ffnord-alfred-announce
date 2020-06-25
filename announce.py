@@ -101,7 +101,7 @@ def mac_mesh(fastd_dev,meshmode=False):
 
 def cpu_info():
   info = cpuinfo.get_cpu_info()
-  return info['brand']
+  return info['brand_raw']
 
 parser = argparse.ArgumentParser()
 
